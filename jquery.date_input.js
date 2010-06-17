@@ -149,21 +149,9 @@ DateInput.prototype = {
   
   // We should hide the date selector if a click event happens outside of it
   hideIfClickOutside: function(event) {
-    if (event.target != this.input[0] && !this.insideSelector(event)) {
+    if (event.target != this.input[0] && !this.dateSelector.has(event.target).length) {
       this.hide();
     };
-  },
-  
-  // Returns true if the given event occurred inside the date selector
-  insideSelector: function(event) {
-    var offset = this.dateSelector.position();
-    offset.right = offset.left + this.dateSelector.outerWidth();
-    offset.bottom = offset.top + this.dateSelector.outerHeight();
-    
-    return event.pageY < offset.bottom &&
-           event.pageY > offset.top &&
-           event.pageX < offset.right &&
-           event.pageX > offset.left;
   },
   
   // Respond to various different keyboard events
